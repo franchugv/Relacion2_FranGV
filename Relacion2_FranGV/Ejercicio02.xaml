@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Relacion2_FranGV.Ejercicio02"
+             Title="Ejercicio02">
+    <Grid        
+        RowDefinitions="Auto, Auto, *, *, *, *"
+        ColumnDefinitions="*, *, *, *"
+        Padding="30"
+        >
+
+        <!--#region Fila 2 -->
+
+
+        <Entry 
+            x:Name="EntryDatos"
+            Grid.Row="0" Grid.ColumnSpan="4"      
+            IsReadOnly="True" 
+            />
+
+        <Button
+            Text="Borrar"
+            Clicked="Limpiar"
+            Grid.Row="1" Grid.ColumnSpan="4"
+            />
+
+        <Button
+            Text="7"
+            Clicked="ControladorBotones"
+            Grid.Row="2" Grid.Column="0"      
+            />
+
+        <Button
+            Text="8"
+            Clicked="ControladorBotones"
+            Grid.Row="2" Grid.Column="1"      
+            />
+
+        <Button
+            Text="9"
+            Clicked="ControladorBotones"
+            Grid.Row="2" Grid.Column="2"      
+            />
+
+        <Button
+            Text="X"
+            Clicked="ControladorBotonesOperadores"
+            Grid.Row="2" Grid.Column="3"      
+            />
+
+
+        <!--#endregion-->
+
+        <!--#region Fila 3 -->
+        <Button
+            Text="4"
+            Clicked="ControladorBotones"
+            Grid.Row="3" Grid.Column="0"      
+            />
+
+        <Button
+            Text="5"
+            Clicked="ControladorBotones"
+            Grid.Row="3" Grid.Column="1"      
+            />
+
+        <Button
+            Text="6"
+            Clicked="ControladorBotones"
+            Grid.Row="3" Grid.Column="2"      
+            />
+
+        <Button
+            Text="+"
+            Clicked="ControladorBotonesOperadores"
+            Grid.Row="3" Grid.Column="3"      
+            />
+
+
+        <!--#endregion-->
+
+        <!--#region Fila 4 -->
+        <Button
+            Text="1"
+            Clicked="ControladorBotones"
+            Grid.Row="4" Grid.Column="0"      
+            />
+
+        <Button
+            Text="2"
+            Clicked="ControladorBotones"
+            Grid.Row="4" Grid.Column="1"      
+            />
+
+        <Button
+            Text="3"
+            Clicked="ControladorBotones"
+            Grid.Row="4" Grid.Column="2"      
+            />
+
+        <Button
+            Text="÷"
+            Clicked="ControladorBotonesOperadores"
+            Grid.Row="4" Grid.Column="3"      
+            />
+
+
+        <!--#endregion-->
+
+        <!--#region Fila 5 -->
+        <Button
+            Text="0"
+            Clicked="ControladorBotones"
+            Grid.Row="5" Grid.Column="0"      
+            />
+
+        <Button
+            Text="%"
+            Clicked="ControladorBotonesOperadores"
+            Grid.Row="5" Grid.Column="1"      
+            />
+
+        <Button
+            Text="-"
+            Clicked="ControladorBotonesOperadores"
+            Grid.Row="5" Grid.Column="2"      
+            />
+
+        <Button
+            Text="="
+            Clicked="ControladorBotonesOperadores"
+            Grid.Row="5" Grid.Column="3"      
+            />
+
+
+        <!--#endregion-->
+
+
+
+
+    </Grid>
+
+</ContentPage>
