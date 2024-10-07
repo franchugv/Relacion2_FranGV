@@ -1,21 +1,20 @@
-
-using static System.Runtime.InteropServices.JavaScript.JSType;
-
 namespace Relacion2_FranGV;
 
-public partial class Ejercicio02 : ContentPage
+public partial class Ejercicio01 : ContentPage
 {
+
     #region RECURSOS CLASE
 
-    public Ejercicio02()
+    public Ejercicio01()
 	{
 		InitializeComponent();
 	}
 
+
     // Datos calculadora
     List<float> Numeros = new List<float>();
     List<string> Operadores = new List<string>();
-    #endregion
+#endregion
 
     #region EVENTOS
     // Eventos
@@ -43,18 +42,18 @@ public partial class Ejercicio02 : ContentPage
             }
 
         }
-        catch(Exception error)
+        catch (Exception error)
         {
             esValido = false;
             mensajeError = error.Message;
         }
         finally
         {
-            if (!esValido) 
+            if (!esValido)
             {
                 MostrarError(mensajeError);
                 LimpiarDatos();
-            } 
+            }
         }
 
     }
@@ -147,18 +146,18 @@ public partial class Ejercicio02 : ContentPage
             {
                 // Inicializando el resultado con el index 0 y calculandolo con el siguiente podremos recorrer todos los datos
                 case "+":
-                    resultado += Numeros[indice + 1]; 
+                    resultado += Numeros[indice + 1];
                     break;
                 case "÷":
                     if (Numeros[indice + 1] == 0) throw new Exception("No se puede dividir Entre 0");
 
-                    resultado /= Numeros[indice + 1]; 
+                    resultado /= Numeros[indice + 1];
                     break;
                 case "-":
-                    resultado -= Numeros[indice + 1]; 
+                    resultado -= Numeros[indice + 1];
                     break;
                 case "x":
-                    resultado *= Numeros[indice + 1]; 
+                    resultado *= Numeros[indice + 1];
                     break;
 
             }
