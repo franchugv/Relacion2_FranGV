@@ -79,6 +79,7 @@ public partial class Ejercicio02 : ContentPage
 
     private void Calculos()
     {
+        // Lo inicializamos al primer valor
         float resultado = Valores[0];
 
 
@@ -96,7 +97,6 @@ public partial class Ejercicio02 : ContentPage
                 case "-":
                     resultado -= Valores[indice + 1]; // Restar el siguiente valor
                     break;
-                // Opcionalmente puedes agregar otros operadores, como multiplicación
                 case "X":
                     resultado *= Valores[indice + 1];
                     break;
@@ -116,6 +116,9 @@ public partial class Ejercicio02 : ContentPage
     private void Limpiar(object sender, EventArgs e)
     {
         EntryDatos.Text = "";
+        // Limpiar Datos
+        Valores.Clear();
+        Operadores.Clear();
     }
 
     private void MostrarError(string error)
