@@ -1,19 +1,24 @@
+
+using static System.Runtime.InteropServices.JavaScript.JSType;
+
 namespace Relacion2_FranGV;
 
 public partial class Ejercicio02 : ContentPage
 {
-	public Ejercicio02()
+    #region RECURSOS CLASE
+
+    public Ejercicio02()
 	{
 		InitializeComponent();
 	}
 
-    // Variables globales
-    List<float> Valores = new List<float>();
+    // Datos calculadora
+    List<float> Numeros = new List<float>();
     List<string> Operadores = new List<string>();
+    #endregion
 
-
+    #region EVENTOS
     // Eventos
-
     private void ControladorBotones(object sender, EventArgs e)
     {
         // Recursos
@@ -23,8 +28,20 @@ public partial class Ejercicio02 : ContentPage
 
         try
         {
-            // Asignar contenido del botón al Entry
-            EntryDatos.Text += boton.Text;
+            switch (boton.Text)
+            {
+                case "Borrar":
+                    LimpiarDatos();
+                    break;
+                case "%":
+                    FuncionBotonPorcentaje();
+                    break;
+                default:
+                    // Asignar contenido del botón al Entry
+                    EntryDatos.Text += boton.Text;
+                    break;
+            }
+
         }
         catch(Exception error)
         {
@@ -38,8 +55,6 @@ public partial class Ejercicio02 : ContentPage
 
     }
 
-
-
     private void ControladorBotonesOperadores(object sender, EventArgs e)
     {
         // Recursos
@@ -51,15 +66,16 @@ public partial class Ejercicio02 : ContentPage
         try
         {
             // Añadir valores
-            Valores.Add(Convert.ToSingle(EntryDatos.Text));
+            // En caso de pulsar el igual, también se guardará el resultado
+            Numeros.Add(Convert.ToSingle(EntryDatos.Text));
 
 
-
-           if(boton.Text != "=")
+            // Cada vez que pulsemos
+            // un operador limpiaremos el Entry
+            if (boton.Text != "=")
             {
                 Operadores.Add(boton.Text);
                 EntryDatos.Text = "";
-
             }
             else
             {
@@ -77,54 +93,75 @@ public partial class Ejercicio02 : ContentPage
         }
     }
 
-    private void Calculos()
+    #endregion
+
+    #region FUNCIONES BOTONES
+    // Funciones botones
+    private void FuncionBotonPorcentaje()
     {
-        // Lo inicializamos al primer valor
-        float resultado = Valores[0];
+        // Recursos
+        float numero = 0;
+
+        // Proceso
+        numero = Convert.ToSingle(EntryDatos.Text);
+        numero = (numero / 100);
 
 
-        for (int indice = 0; indice < Operadores.Count; indice++)
-        {
-
-            switch (Operadores[indice])
-            {
-                case "+":
-                    resultado += Valores[indice + 1]; // Sumar el siguiente valor
-                    break;
-                case "÷":
-                    resultado /= Valores[indice + 1]; // Dividir por el siguiente valor
-                    break;
-                case "-":
-                    resultado -= Valores[indice + 1]; // Restar el siguiente valor
-                    break;
-                case "X":
-                    resultado *= Valores[indice + 1];
-                    break;
-                case "%":
-
-                    break;
-            }
-        }
-
-        EntryDatos.Text = resultado.ToString();
-
-        // Limpiar Datos
-        Valores.Clear();
-        Operadores.Clear();
+        EntryDatos.Text = numero.ToString();
     }
 
-    private void Limpiar(object sender, EventArgs e)
+    private void LimpiarDatos()
     {
+        // Limpiar Datos
         EntryDatos.Text = "";
-        // Limpiar Datos
-        Valores.Clear();
+        Numeros.Clear();
         Operadores.Clear();
     }
+    #endregion
 
+    #region INTERFAZ
+    // Salida
     private void MostrarError(string error)
     {
         DisplayAlert("Error", $"Error: {error}", "Ok");
     }
 
+    private void Calculos()
+    {
+        // Lo inicializamos al primer valor
+        float resultado = Numeros[0];
 
+        // Los calculos están divididos por los operadores
+        for (int indice = 0; indice < Operadores.Count; indice++)
+        {
+
+            switch (Operadores[indice])
+            {
+                // Inicializando el resultado con el index 0 y calculandolo con el siguiente podremos recorrer todos los datos
+                case "+":
+                    resultado += Numeros[indice + 1]; 
+                    break;
+                case "÷":
+                    if (Numeros[indice + 1] == 0) throw new Exception("No se puede dividir Entre 0");
+
+                    resultado /= Numeros[indice + 1]; 
+                    break;
+                case "-":
+                    resultado -= Numeros[indice + 1]; 
+                    break;
+                case "x":
+                    resultado *= Numeros[indice + 1]; 
+                    break;
+
+            }
+        }
+        // Mostrar en pantalla el resultado
+        EntryDatos.Text = resultado.ToString();
+
+        // Limpiar Datos
+        Numeros.Clear();
+        Operadores.Clear();
+    }
+
+    #endregion
 }

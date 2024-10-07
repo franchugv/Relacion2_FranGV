@@ -20,7 +20,7 @@
 
         <Button
             Text="Borrar"
-            Clicked="Limpiar"
+            Clicked="ControladorBotones"
             Grid.Row="1" Grid.ColumnSpan="4"
             />
 
@@ -43,7 +43,7 @@
             />
 
         <Button
-            Text="X"
+            Text="x"
             Clicked="ControladorBotonesOperadores"
             Grid.Row="2" Grid.Column="3"      
             />
@@ -116,7 +116,7 @@
 
         <Button
             Text="%"
-            Clicked="ControladorBotonesOperadores"
+            Clicked="ControladorBotones"
             Grid.Row="5" Grid.Column="1"      
             />
 
