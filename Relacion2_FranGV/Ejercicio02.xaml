@@ -7,6 +7,8 @@
         RowDefinitions="Auto, Auto, *, *, *, *"
         ColumnDefinitions="*, *, *, *"
         Padding="30"
+        RowSpacing="10"
+        ColumnSpacing="10"
         >
 
         <!--#region Fila 2 -->
