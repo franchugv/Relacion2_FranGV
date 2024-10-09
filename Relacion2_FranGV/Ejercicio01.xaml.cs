@@ -4,16 +4,20 @@ public partial class Ejercicio01 : ContentPage
 {
 
     #region RECURSOS CLASE
+    // MIEMBOS CLASE
+    private List<float> _numeros = new List<float>();
+    private List<string> _operadores = new List<string>();
+
 
     public Ejercicio01()
 	{
-		InitializeComponent();
-	}
+        InitializeComponent();
+
+    }
 
 
-    // Datos calculadora
-    List<float> Numeros = new List<float>();
-    List<string> Operadores = new List<string>();
+
+
 #endregion
 
     #region EVENTOS
@@ -33,9 +37,11 @@ public partial class Ejercicio01 : ContentPage
                     LimpiarDatos();
                     break;
                 case "%":
+                    if (String.IsNullOrEmpty(EntryDatos.Text)) throw new Exception("Cadena vacía");
+
                     FuncionBotonPorcentaje();
                     break;
-                default:
+                default: // Números
                     // Asignar contenido del botón al Entry
                     EntryDatos.Text += boton.Text;
                     break;
@@ -70,19 +76,26 @@ public partial class Ejercicio01 : ContentPage
         {
             // Añadir valores
             // En caso de pulsar el igual, también se guardará el resultado
-            Numeros.Add(Convert.ToSingle(EntryDatos.Text));
+            if (String.IsNullOrEmpty(EntryDatos.Text)) throw new Exception("Cadena vacía");
+            _numeros.Add(Convert.ToSingle(EntryDatos.Text));
 
 
             // Cada vez que pulsemos
             // un operador limpiaremos el Entry
             if (boton.Text != "=")
             {
-                Operadores.Add(boton.Text);
+                _operadores.Add(boton.Text);
                 EntryDatos.Text = "";
             }
             else
             {
-                Calculos();
+                EntryDatos.Text = Calculos.CalculosCalculadora(_numeros, _operadores).ToString();
+
+               
+
+                _numeros.Clear();
+                _operadores.Clear();
+
             }
         }
         catch (Exception error)
@@ -121,8 +134,8 @@ public partial class Ejercicio01 : ContentPage
     {
         // Limpiar Datos
         EntryDatos.Text = "";
-        Numeros.Clear();
-        Operadores.Clear();
+        _numeros.Clear();
+        _operadores.Clear();
     }
     #endregion
 
@@ -133,42 +146,9 @@ public partial class Ejercicio01 : ContentPage
         DisplayAlert("Error", $"Error: {error}", "Ok");
     }
 
-    private void Calculos()
-    {
-        // Lo inicializamos al primer valor
-        float resultado = Numeros[0];
+   
 
-        // Los calculos están divididos por los operadores
-        for (int indice = 0; indice < Operadores.Count; indice++)
-        {
-
-            switch (Operadores[indice])
-            {
-                // Inicializando el resultado con el index 0 y calculandolo con el siguiente podremos recorrer todos los datos
-                case "+":
-                    resultado += Numeros[indice + 1];
-                    break;
-                case "÷":
-                    if (Numeros[indice + 1] == 0) throw new Exception("No se puede dividir Entre 0");
-
-                    resultado /= Numeros[indice + 1];
-                    break;
-                case "-":
-                    resultado -= Numeros[indice + 1];
-                    break;
-                case "x":
-                    resultado *= Numeros[indice + 1];
-                    break;
-
-            }
-        }
-        // Mostrar en pantalla el resultado
-        EntryDatos.Text = resultado.ToString();
-
-        // Limpiar Datos
-        Numeros.Clear();
-        Operadores.Clear();
-    }
+    
 
     #endregion
 }

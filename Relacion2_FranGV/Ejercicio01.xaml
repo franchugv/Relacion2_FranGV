@@ -5,8 +5,9 @@
              Title="Ejercicio 1">
 
     <StackLayout
-        HorizontalOptions="Center"
-        VerticalOptions="Center"
+        Orientation="Vertical"
+        HorizontalOptions="CenterAndExpand"
+        VerticalOptions="CenterAndExpand"
         Padding="9"
         >
 

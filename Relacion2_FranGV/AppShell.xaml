@@ -7,6 +7,6 @@
     Shell.FlyoutBehavior="Disabled">
     <ShellContent
         Title="Home"
-        ContentTemplate="{DataTemplate local:Ejercicio03}"
-        Route="Ejercicio03" />
+        ContentTemplate="{DataTemplate local:Ejercicio01}"
+        Route="Ejercicio01" />
 </Shell>
