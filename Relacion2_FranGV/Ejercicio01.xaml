@@ -6,6 +6,7 @@
 
     <StackLayout
         HorizontalOptions="Center"
+        VerticalOptions="Center"
         Padding="9"
         >
 
