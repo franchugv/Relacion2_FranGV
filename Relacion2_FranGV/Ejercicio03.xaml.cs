@@ -13,17 +13,6 @@ public partial class Ejercicio03 : ContentPage
         // Inicializar Controles
 
 
-        Horizontallayout1 = new HorizontalStackLayout
-        {
-            Padding = new Thickness(20, 40, 20, 20),
-            HorizontalOptions = LayoutOptions.Center,
-            VerticalOptions = LayoutOptions.Center,
-
-            Children =
-            {
-                EntryDatos
-            }
-        };
 
         VerticallayoutPrincipal = new VerticalStackLayout
         {
@@ -32,12 +21,14 @@ public partial class Ejercicio03 : ContentPage
             VerticalOptions = LayoutOptions.Center,
 
             Children =
-            {
-                Horizontallayout1
+            {                
+                EntryDatos
             }
         };
 
 
+
+        // Generación de botones
         string[] BotonesStr = { "1", "2", "3", "4", "5", "6", "7", "8", "9", "%", "Borrar" };
 
         Button[] botones = new Button[BotonesStr.Length];
@@ -46,17 +37,22 @@ public partial class Ejercicio03 : ContentPage
             botones[indice] = new Button()
 			{
 				Text = $"{BotonesStr[indice]}",
-				WidthRequest = 50,
-				HeightRequest = 50,
+                WidthRequest = 50,
+                HeightRequest = 50,
 
-			};
+            };
 
-            Horizontallayout1.Children.Add(botones[indice]);
+            // EVENTO
+            botones[indice].Clicked += (sender, e) =>
+            {
+                ControladorBotones(sender, e);
+            };
+
+            VerticallayoutPrincipal.Children.Add(botones[indice]);
 
         }
 
 		string[] operadoresStr = { "x", "-", "+", "÷", "="};
-
         Button[] operadores = new Button[operadoresStr.Length];
 
         for (int indice = 0; indice < operadoresStr.Length; indice++)
@@ -69,28 +65,21 @@ public partial class Ejercicio03 : ContentPage
 
             };
 
-            Horizontallayout1.Children.Add(operadores[indice]);
-
-        }
-
-
-
-        Content = VerticallayoutPrincipal;
-
-        for (int indice = 0; indice < botones.Length; indice++)
-        {
-            botones[indice].Clicked += (sender, e) =>
-            {
-                ControladorBotones(sender, e);
-            };
-        }
-        for (int indice = 0; indice < operadores.Length; indice++)
-        {
             operadores[indice].Clicked += (sender, e) =>
             {
                 ControladorBotonesOperadores(sender, e);
             };
+
+            VerticallayoutPrincipal.Children.Add(operadores[indice]);
+
         }
+
+
+        // EVENTOS
+        Content = VerticallayoutPrincipal;
+
+
+
 
 
 
