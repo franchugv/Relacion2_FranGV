@@ -1,19 +1,24 @@
+using Microsoft.Maui.Controls.Compatibility.Platform;
+
 namespace Relacion2_FranGV;
 
 public partial class Ejercicio03 : ContentPage
 {
-	public Ejercicio03()
+
+
+    // Datos calculadora
+    List<float> _numeros = new List<float>();
+    List<string> _operadores = new List<string>();
+    Entry EntryDatos = new Entry() { IsReadOnly = true };
+
+    public Ejercicio03()
 	{
-		InitializeComponent();
+		// InitializeComponent(); // Sobra
 
         // Inicializar Layout
         VerticalStackLayout VerticallayoutPrincipal;
-        HorizontalStackLayout Horizontallayout1;
 
-        // Inicializar Controles
-
-
-
+        // Instanciar Layout
         VerticallayoutPrincipal = new VerticalStackLayout
         {
             Padding = new Thickness(20, 40, 20, 20),
@@ -28,70 +33,102 @@ public partial class Ejercicio03 : ContentPage
 
 
 
+
         // Generación de botones
-        string[] BotonesStr = { "1", "2", "3", "4", "5", "6", "7", "8", "9", "%", "Borrar" };
 
-        Button[] botones = new Button[BotonesStr.Length];
-		for(int indice = 0; indice < BotonesStr.Length; indice++)
+        HorizontalStackLayout Fila1 = new HorizontalStackLayout();
+        HorizontalStackLayout Fila2 = new HorizontalStackLayout();
+        HorizontalStackLayout Fila3 = new HorizontalStackLayout();
+        HorizontalStackLayout Fila4 = new HorizontalStackLayout();
+
+        string[] ListaBotonesNoOperadores = { "1", "2", "3", "4", "5", "6", "7", "8", "9", "%", "Borrar" };
+ 
+
+
+        const byte numColum = 4;
+        string[] BotonesTotales = { "1", "2", "3", "4", "5", "6", "7", "8", "9", "%", "Borrar", "x", "-", "+", "÷", "=" };
+        string   Fila0List = "Borrar";
+        string[] Fila1List = { "7", "8", "9", "x" };
+        string[] Fila2List = { "4", "5", "6", "+" };
+        string[] Fila3List = { "1", "2", "3", "÷" };
+        string[] Fila4List = { "0", "%", "-", "=" };
+
+
+        List<Button> botones = new List<Button>();
+
+        // FILA 1
+        for (int indice = 0; indice < numColum; indice++)
 		{
-            botones[indice] = new Button()
-			{
-				Text = $"{BotonesStr[indice]}",
-                WidthRequest = 50,
-                HeightRequest = 50,
-
-            };
-
-            // EVENTO
-            botones[indice].Clicked += (sender, e) =>
-            {
-                ControladorBotones(sender, e);
-            };
-
-            VerticallayoutPrincipal.Children.Add(botones[indice]);
-
+            botones.Add(CrearBoton(Fila1List[indice], ListaBotonesNoOperadores));
+            
+            Fila1.Children.Add(botones[indice]);
         }
+        VerticallayoutPrincipal.Children.Add(Fila1);
 
-		string[] operadoresStr = { "x", "-", "+", "÷", "="};
-        Button[] operadores = new Button[operadoresStr.Length];
-
-        for (int indice = 0; indice < operadoresStr.Length; indice++)
+        // FILA 2
+        for(int indice = 0; indice < numColum; indice++)
         {
-            operadores[indice] = new Button()
-            {
-                Text = $"{operadoresStr[indice]}",
-                WidthRequest = 50,
-                HeightRequest = 50,
+            botones.Add(CrearBoton(Fila2List[indice], ListaBotonesNoOperadores));
 
-            };
+            Fila2.Children.Add(botones[indice]);
+        }
+        VerticallayoutPrincipal.Children.Add(Fila2);
 
-            operadores[indice].Clicked += (sender, e) =>
-            {
-                ControladorBotonesOperadores(sender, e);
-            };
+        // FILA 3
 
-            VerticallayoutPrincipal.Children.Add(operadores[indice]);
+        for (int indice = 0; indice < numColum; indice++)
+        {
+            botones.Add(CrearBoton(Fila3List[indice], ListaBotonesNoOperadores));
+
+            Fila3.Children.Add(botones[indice]);
+
 
         }
+        VerticallayoutPrincipal.Children.Add(Fila3);
+
+        // FILA 4
+
+        for (int indice = 0; indice < numColum; indice++)
+        {
+            botones.Add(CrearBoton(Fila4List[indice], ListaBotonesNoOperadores));
+
+            Fila4.Children.Add(botones[indice]);
+        }
+        VerticallayoutPrincipal.Children.Add(Fila4);
 
 
-        // EVENTOS
+
+        // Cargar el Layout
         Content = VerticallayoutPrincipal;
-
-
-
 
 
 
     }
 
-    // Datos calculadora
-    List<float> Numeros = new List<float>();
-    List<string> Operadores = new List<string>();
-    Entry EntryDatos = new Entry()
+    // Creación de controles
+    private Button CrearBoton(string texto, string[] Lista)
     {
-        IsReadOnly = true,
-    };
+        Button boton = new Button()
+        {
+            Text = texto,
+            WidthRequest = 50,
+            HeightRequest = 50,
+        };
+
+
+        if (Lista.Contains(texto))
+        {
+            boton.Clicked += (s, e) => ControladorBotones(s, e);
+        }
+        else
+        {
+            boton.Clicked += (s, e) => ControladorBotonesOperadores(s, e);
+        }
+
+
+        return boton;
+    }
+
     #region EVENTOS
     // Eventos
     private void ControladorBotones(object sender, EventArgs e)
@@ -146,19 +183,25 @@ public partial class Ejercicio03 : ContentPage
         {
             // Añadir valores
             // En caso de pulsar el igual, también se guardará el resultado
-            Numeros.Add(Convert.ToSingle(EntryDatos.Text));
+            _numeros.Add(Convert.ToSingle(EntryDatos.Text));
 
 
             // Cada vez que pulsemos
             // un operador limpiaremos el Entry
             if (boton.Text != "=")
             {
-                Operadores.Add(boton.Text);
+                _operadores.Add(boton.Text);
                 EntryDatos.Text = "";
             }
             else
             {
-                Calculos();
+                EntryDatos.Text = Calculos.CalculosCalculadora(_numeros, _operadores).ToString();
+
+                // Mostrar en pantalla el resultado
+
+                // Limpiar Datos
+                _numeros.Clear();
+                _operadores.Clear();
             }
         }
         catch (Exception error)
@@ -197,8 +240,8 @@ public partial class Ejercicio03 : ContentPage
     {
         // Limpiar Datos
         EntryDatos.Text = "";
-        Numeros.Clear();
-        Operadores.Clear();
+        _numeros.Clear();
+        _operadores.Clear();
     }
     #endregion
 
@@ -208,40 +251,4 @@ public partial class Ejercicio03 : ContentPage
         DisplayAlert("Error", $"Error: {error}", "Ok");
     }
 
-    private void Calculos()
-    {
-        // Lo inicializamos al primer valor
-        float resultado = Numeros[0];
-
-        // Los calculos están divididos por los operadores
-        for (int indice = 0; indice < Operadores.Count; indice++)
-        {
-
-            switch (Operadores[indice])
-            {
-                // Inicializando el resultado con el index 0 y calculandolo con el siguiente podremos recorrer todos los datos
-                case "+":
-                    resultado += Numeros[indice + 1];
-                    break;
-                case "÷":
-                    if (Numeros[indice + 1] == 0) throw new Exception("No se puede dividir Entre 0");
-
-                    resultado /= Numeros[indice + 1];
-                    break;
-                case "-":
-                    resultado -= Numeros[indice + 1];
-                    break;
-                case "x":
-                    resultado *= Numeros[indice + 1];
-                    break;
-
-            }
-        }
-        // Mostrar en pantalla el resultado
-        EntryDatos.Text = resultado.ToString();
-
-        // Limpiar Datos
-        Numeros.Clear();
-        Operadores.Clear();
-    }
 }
