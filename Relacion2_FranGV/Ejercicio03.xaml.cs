@@ -17,6 +17,15 @@ public partial class Ejercicio03 : ContentPage
 
         // Inicializar Layout
         VerticalStackLayout VerticallayoutPrincipal;
+        // Creación filas
+        HorizontalStackLayout Fila0 = new HorizontalStackLayout()
+        {
+            HorizontalOptions = LayoutOptions.Center
+        };
+        HorizontalStackLayout Fila1 = new HorizontalStackLayout();
+        HorizontalStackLayout Fila2 = new HorizontalStackLayout();
+        HorizontalStackLayout Fila3 = new HorizontalStackLayout();
+        HorizontalStackLayout Fila4 = new HorizontalStackLayout();
 
         // Instanciar Layout
         VerticallayoutPrincipal = new VerticalStackLayout
@@ -27,7 +36,12 @@ public partial class Ejercicio03 : ContentPage
 
             Children =
             {                
-                EntryDatos
+                EntryDatos,
+                Fila0,
+                Fila1,
+                Fila2,
+                Fila3,
+                Fila4
             }
         };
 
@@ -36,15 +50,12 @@ public partial class Ejercicio03 : ContentPage
 
         // Generación de botones
 
-        HorizontalStackLayout Fila1 = new HorizontalStackLayout();
-        HorizontalStackLayout Fila2 = new HorizontalStackLayout();
-        HorizontalStackLayout Fila3 = new HorizontalStackLayout();
-        HorizontalStackLayout Fila4 = new HorizontalStackLayout();
+
 
         string[] ListaBotonesNoOperadores = { "1", "2", "3", "4", "5", "6", "7", "8", "9", "%", "Borrar" };
  
 
-
+        // RECURSOS FILAS
         const byte numColum = 4;
         string[] BotonesTotales = { "1", "2", "3", "4", "5", "6", "7", "8", "9", "%", "Borrar", "x", "-", "+", "÷", "=" };
         string   Fila0List = "Borrar";
@@ -55,46 +66,48 @@ public partial class Ejercicio03 : ContentPage
 
 
         List<Button> botones = new List<Button>();
+        // FILA 0
+        Fila0.Children.Add(CrearBoton(Fila0List, ListaBotonesNoOperadores, 200));
 
         // FILA 1
         for (int indice = 0; indice < numColum; indice++)
 		{
-            botones.Add(CrearBoton(Fila1List[indice], ListaBotonesNoOperadores));
+            botones.Add(CrearBoton(Fila1List[indice], ListaBotonesNoOperadores, 50));
             
             Fila1.Children.Add(botones[indice]);
         }
-        VerticallayoutPrincipal.Children.Add(Fila1);
+
+        List<Button> botonesFila2 = new List<Button>();
 
         // FILA 2
-        for(int indice = 0; indice < numColum; indice++)
+        for (int indice = 0; indice < numColum; indice++)
         {
-            botones.Add(CrearBoton(Fila2List[indice], ListaBotonesNoOperadores));
+            botonesFila2.Add(CrearBoton(Fila2List[indice], ListaBotonesNoOperadores, 50));
 
-            Fila2.Children.Add(botones[indice]);
+            Fila2.Children.Add(botonesFila2[indice]);
         }
-        VerticallayoutPrincipal.Children.Add(Fila2);
 
         // FILA 3
+        List<Button> botonesFila3 = new List<Button>();
 
         for (int indice = 0; indice < numColum; indice++)
         {
-            botones.Add(CrearBoton(Fila3List[indice], ListaBotonesNoOperadores));
+            botonesFila3.Add(CrearBoton(Fila3List[indice], ListaBotonesNoOperadores, 50));
 
-            Fila3.Children.Add(botones[indice]);
+            Fila3.Children.Add(botonesFila3[indice]);
 
 
         }
-        VerticallayoutPrincipal.Children.Add(Fila3);
 
         // FILA 4
+        List<Button> botonesFila4 = new List<Button>();
 
         for (int indice = 0; indice < numColum; indice++)
         {
-            botones.Add(CrearBoton(Fila4List[indice], ListaBotonesNoOperadores));
+            botonesFila4.Add(CrearBoton(Fila4List[indice], ListaBotonesNoOperadores, 50));
 
-            Fila4.Children.Add(botones[indice]);
+            Fila4.Children.Add(botonesFila4[indice]);
         }
-        VerticallayoutPrincipal.Children.Add(Fila4);
 
 
 
@@ -106,12 +119,12 @@ public partial class Ejercicio03 : ContentPage
     }
 
     // Creación de controles
-    private Button CrearBoton(string texto, string[] Lista)
+    private Button CrearBoton(string texto, string[] Lista, float tamanio)
     {
         Button boton = new Button()
         {
             Text = texto,
-            WidthRequest = 50,
+            WidthRequest = tamanio,
             HeightRequest = 50,
         };
 
