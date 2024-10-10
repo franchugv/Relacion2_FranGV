@@ -16,9 +16,9 @@ public partial class Ejercicio04 : ContentPage
 
         Grid GridPrincipal = new Grid()
         {
-            RowSpacing = 4,
-            ColumnSpacing = 4,
-            VerticalOptions = LayoutOptions.Fill,
+            RowSpacing = 2,
+            ColumnSpacing = 2,
+            VerticalOptions = LayoutOptions.Center,
             RowDefinitions =
             {                
                 new RowDefinition{Height = new GridLength(100)},
