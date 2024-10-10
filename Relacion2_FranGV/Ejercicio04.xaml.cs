@@ -38,13 +38,13 @@ public partial class Ejercicio04 : ContentPage
             }
         };
         
+        // Asignar Entry
         Grid.SetColumnSpan(EntryDatos, 4);
         Grid.SetRow(EntryDatos, 0);
         GridPrincipal.Children.Add(EntryDatos);
+
+
         // Generación de botones
-
-
-
         string[] ListaBotonesNoOperadores = { "1", "2", "3", "4", "5", "6", "7", "8", "9", "%", "Borrar" };
 
 

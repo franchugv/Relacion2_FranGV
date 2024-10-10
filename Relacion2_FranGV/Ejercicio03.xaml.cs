@@ -18,10 +18,7 @@ public partial class Ejercicio03 : ContentPage
         // Inicializar Layout
         VerticalStackLayout VerticallayoutPrincipal;
         // Creación filas
-        HorizontalStackLayout Fila0 = new HorizontalStackLayout()
-        {
-            HorizontalOptions = LayoutOptions.Center
-        };
+        HorizontalStackLayout Fila0 = new HorizontalStackLayout() { HorizontalOptions = LayoutOptions.Center };
         HorizontalStackLayout Fila1 = new HorizontalStackLayout();
         HorizontalStackLayout Fila2 = new HorizontalStackLayout();
         HorizontalStackLayout Fila3 = new HorizontalStackLayout();
