@@ -58,7 +58,6 @@ public partial class Ejercicio04 : ContentPage
         string[] Fila4List = { "0", "%", "-", "=" };
 
 
-        List<Button> botones = new List<Button>();
         // FILA 0
 
         Button botonBorrar = CrearBoton(Fila0List, ListaBotonesNoOperadores, 200);
@@ -71,12 +70,16 @@ public partial class Ejercicio04 : ContentPage
         Grid.SetRow(botonBorrar, 1);
         GridPrincipal.Children.Add(botonBorrar);
 
+
+        List<Button> botonesFila1 = new List<Button>();
+
+
         // FILA 1
         for (int indice = 0; indice < numColum; indice++)
         {
-            botones.Add(CrearBoton(Fila1List[indice], ListaBotonesNoOperadores, 50));
+            botonesFila1.Add(CrearBoton(Fila1List[indice], ListaBotonesNoOperadores, 50));
 
-            GridPrincipal.Add(botones[indice], indice, 2);
+            GridPrincipal.Add(botonesFila1[indice], indice, 2);
         }
 
         List<Button> botonesFila2 = new List<Button>();
