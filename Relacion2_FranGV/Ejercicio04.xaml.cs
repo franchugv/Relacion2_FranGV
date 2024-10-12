@@ -125,17 +125,17 @@ public partial class Ejercicio04 : ContentPage
 
 
     // Creación de controles
-    private Button CrearBoton(string texto, string[] Lista, float tamanio)
+    private Button CrearBoton(string textoBoton, string[] ListaBotones, float tamanio)
     {
         Button boton = new Button()
         {
-            Text = texto,
+            Text = textoBoton,
             WidthRequest = tamanio,
             HeightRequest = 50,
         };
 
 
-        if (Lista.Contains(texto))
+        if (ListaBotones.Contains(textoBoton))
         {
             boton.Clicked += (s, e) => ControladorBotones(s, e);
         }
