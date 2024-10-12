@@ -45,7 +45,7 @@ public partial class Ejercicio04 : ContentPage
 
 
         // Generación de botones
-        string[] ListaBotonesNoOperadores = { "1", "2", "3", "4", "5", "6", "7", "8", "9", "%", "Borrar" };
+        string[] ListaBotonesComunes = { "1", "2", "3", "4", "5", "6", "7", "8", "9", "%", "Borrar" };
 
 
         // RECURSOS FILAS
@@ -60,10 +60,10 @@ public partial class Ejercicio04 : ContentPage
 
         // FILA 0
 
-        Button botonBorrar = CrearBoton(Fila0List, ListaBotonesNoOperadores, 200);
+        Button botonBorrar = CrearBoton(Fila0List, ListaBotonesComunes, 200);
 
         // Crear el botón
-        CrearBoton(Fila0List, ListaBotonesNoOperadores, 600);
+        CrearBoton(Fila0List, ListaBotonesComunes, 600);
 
         // Añadir el botón al GridPrincipal
         Grid.SetColumnSpan(botonBorrar, 4);
@@ -77,7 +77,7 @@ public partial class Ejercicio04 : ContentPage
         // FILA 1
         for (int indice = 0; indice < numColum; indice++)
         {
-            botonesFila1.Add(CrearBoton(Fila1List[indice], ListaBotonesNoOperadores, 50));
+            botonesFila1.Add(CrearBoton(Fila1List[indice], ListaBotonesComunes, 50));
 
             GridPrincipal.Add(botonesFila1[indice], indice, 2);
         }
@@ -87,7 +87,7 @@ public partial class Ejercicio04 : ContentPage
         // FILA 2
         for (int indice = 0; indice < numColum; indice++)
         {
-            botonesFila2.Add(CrearBoton(Fila2List[indice], ListaBotonesNoOperadores, 50));
+            botonesFila2.Add(CrearBoton(Fila2List[indice], ListaBotonesComunes, 50));
 
             GridPrincipal.Add(botonesFila2[indice], indice, 3);
         }
@@ -97,7 +97,7 @@ public partial class Ejercicio04 : ContentPage
 
         for (int indice = 0; indice < numColum; indice++)
         {
-            botonesFila3.Add(CrearBoton(Fila3List[indice], ListaBotonesNoOperadores, 50));
+            botonesFila3.Add(CrearBoton(Fila3List[indice], ListaBotonesComunes, 50));
 
             GridPrincipal.Add(botonesFila3[indice], indice, 4);
 
@@ -109,7 +109,7 @@ public partial class Ejercicio04 : ContentPage
 
         for (int indice = 0; indice < numColum; indice++)
         {
-            botonesFila4.Add(CrearBoton(Fila4List[indice], ListaBotonesNoOperadores, 50));
+            botonesFila4.Add(CrearBoton(Fila4List[indice], ListaBotonesComunes, 50));
 
             GridPrincipal.Add(botonesFila4[indice], indice, 5);
         }
