@@ -51,19 +51,19 @@ public partial class Ejercicio04 : ContentPage
         // RECURSOS FILAS
         const byte numColum = 4;
         string[] BotonesTotales = { "1", "2", "3", "4", "5", "6", "7", "8", "9", "%", "Borrar", "x", "-", "+", "÷", "=" };
-        string Fila0List = "Borrar";
-        string[] Fila1List = { "7", "8", "9", "x" };
-        string[] Fila2List = { "4", "5", "6", "+" };
-        string[] Fila3List = { "1", "2", "3", "÷" };
-        string[] Fila4List = { "0", "%", "-", "=" };
+        string Fila0 = "Borrar";
+        string[] FilaList = { 
+            "7", "8", "9", "x",
+            "4", "5", "6", "+", 
+            "1", "2", "3", "÷", 
+            "0", "%", "-", "=" };
 
 
         // FILA 0
-
-        Button botonBorrar = CrearBoton(Fila0List, ListaBotonesComunes, 200);
+        Button botonBorrar = CrearBoton(Fila0, ListaBotonesComunes, 200);
 
         // Crear el botón
-        CrearBoton(Fila0List, ListaBotonesComunes, 600);
+        CrearBoton(Fila0, ListaBotonesComunes, 600);
 
         // Añadir el botón al GridPrincipal
         Grid.SetColumnSpan(botonBorrar, 4);
@@ -71,49 +71,66 @@ public partial class Ejercicio04 : ContentPage
         GridPrincipal.Children.Add(botonBorrar);
 
 
-        List<Button> botonesFila1 = new List<Button>();
+        // List<Button> botonesFila1 = new List<Button>();
 
 
-        // FILA 1
-        for (int indice = 0; indice < numColum; indice++)
+        int contador = 0;
+
+        for (int filas = 1; filas < numColum; filas++)
         {
-            botonesFila1.Add(CrearBoton(Fila1List[indice], ListaBotonesComunes, 50));
+           for(int columnas = 0; columnas < numColum; columnas++)
+            {
+                Button botones = CrearBoton(FilaList[contador], ListaBotonesComunes, 50);
+                contador += 1;
 
-            GridPrincipal.Add(botonesFila1[indice], indice, 2);
+
+                // Botón, columna, fila
+                GridPrincipal.Add(botones, columnas, filas+1);
+            }
         }
 
-        List<Button> botonesFila2 = new List<Button>();
+        #region 
+        //// FILA 1
+        //for (int indice = 0; indice < numColum; indice++)
+        //{
+        //    botonesFila1.Add(CrearBoton(Fila1List[indice], ListaBotonesComunes, 50));
 
-        // FILA 2
-        for (int indice = 0; indice < numColum; indice++)
-        {
-            botonesFila2.Add(CrearBoton(Fila2List[indice], ListaBotonesComunes, 50));
+        //    // Botón, columna, fila
+        //    GridPrincipal.Add(botonesFila1[indice], indice, 2);
+        //}
 
-            GridPrincipal.Add(botonesFila2[indice], indice, 3);
-        }
+        //List<Button> botonesFila2 = new List<Button>();
 
-        // FILA 3
-        List<Button> botonesFila3 = new List<Button>();
+        //// FILA 2
+        //for (int indice = 0; indice < numColum; indice++)
+        //{
+        //    botonesFila2.Add(CrearBoton(Fila2List[indice], ListaBotonesComunes, 50));
 
-        for (int indice = 0; indice < numColum; indice++)
-        {
-            botonesFila3.Add(CrearBoton(Fila3List[indice], ListaBotonesComunes, 50));
+        //    GridPrincipal.Add(botonesFila2[indice], indice, 3);
+        //}
 
-            GridPrincipal.Add(botonesFila3[indice], indice, 4);
+        //// FILA 3
+        //List<Button> botonesFila3 = new List<Button>();
+
+        //for (int indice = 0; indice < numColum; indice++)
+        //{
+        //    botonesFila3.Add(CrearBoton(Fila3List[indice], ListaBotonesComunes, 50));
+
+        //    GridPrincipal.Add(botonesFila3[indice], indice, 4);
 
 
-        }
+        //}
 
-        // FILA 4
-        List<Button> botonesFila4 = new List<Button>();
+        //// FILA 4
+        //List<Button> botonesFila4 = new List<Button>();
 
-        for (int indice = 0; indice < numColum; indice++)
-        {
-            botonesFila4.Add(CrearBoton(Fila4List[indice], ListaBotonesComunes, 50));
+        //for (int indice = 0; indice < numColum; indice++)
+        //{
+        //    botonesFila4.Add(CrearBoton(Fila4List[indice], ListaBotonesComunes, 50));
 
-            GridPrincipal.Add(botonesFila4[indice], indice, 5);
-        }
-
+        //    GridPrincipal.Add(botonesFila4[indice], indice, 5);
+        //}
+        #endregion
 
 
         Content = GridPrincipal;
