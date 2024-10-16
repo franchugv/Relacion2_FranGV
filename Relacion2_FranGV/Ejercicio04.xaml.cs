@@ -16,25 +16,24 @@ public partial class Ejercicio04 : ContentPage
 
         Grid GridPrincipal = new Grid()
         {
-            RowSpacing = 2,
-            ColumnSpacing = 2,
-            VerticalOptions = LayoutOptions.Center,
-            RowDefinitions =
-            {                
-                new RowDefinition{Height = new GridLength(100)},
-                new RowDefinition{Height = new GridLength(100)},
-                new RowDefinition{Height = new GridLength(100)},
-                new RowDefinition{Height = new GridLength(100)},
-                new RowDefinition{Height = new GridLength(100)},
-                new RowDefinition{Height = new GridLength(100)},
-                new RowDefinition{Height = new GridLength(100)},
-            },
+            VerticalOptions = LayoutOptions.Fill,
+            HorizontalOptions = LayoutOptions.Fill,
             ColumnDefinitions =
             {
                 new ColumnDefinition(),
                 new ColumnDefinition(),
                 new ColumnDefinition(),
                 new ColumnDefinition()
+            },
+            RowDefinitions =
+            {                
+                new RowDefinition(),
+                new RowDefinition(),
+                new RowDefinition(),
+                new RowDefinition(),
+                new RowDefinition(),
+                new RowDefinition(),
+                new RowDefinition(),
             }
         };
         
@@ -50,7 +49,8 @@ public partial class Ejercicio04 : ContentPage
 
         // RECURSOS FILAS
         const byte numColum = 4;
-        string[] BotonesTotales = { "1", "2", "3", "4", "5", "6", "7", "8", "9", "%", "Borrar", "x", "-", "+", "÷", "=" };
+        const byte numFilas = 4;
+
         string Fila0 = "Borrar";
         string[] FilaList = { 
             "7", "8", "9", "x",
@@ -60,10 +60,10 @@ public partial class Ejercicio04 : ContentPage
 
 
         // FILA 0
-        Button botonBorrar = CrearBoton(Fila0, ListaBotonesComunes, 200);
+        Button botonBorrar = CrearBoton(Fila0, ListaBotonesComunes, 200, 50);
 
         // Crear el botón
-        CrearBoton(Fila0, ListaBotonesComunes, 600);
+        CrearBoton(Fila0, ListaBotonesComunes, 1000, 50);
 
         // Añadir el botón al GridPrincipal
         Grid.SetColumnSpan(botonBorrar, 4);
@@ -71,20 +71,23 @@ public partial class Ejercicio04 : ContentPage
         GridPrincipal.Children.Add(botonBorrar);
 
 
-        // List<Button> botonesFila1 = new List<Button>();
-
 
         int contador = 0;
 
-        for (int filas = 1; filas < numColum; filas++)
+        // fila = 1, queremos que empiece una fila por debajo, ç
+        // y numFilas también lo tenemos que desplazar una posición
+        // para que el bucle no acabe antes de la cuenta
+        for (int filas = 1; filas < numFilas+1; filas++)
         {
            for(int columnas = 0; columnas < numColum; columnas++)
             {
-                Button botones = CrearBoton(FilaList[contador], ListaBotonesComunes, 50);
+                Button botones = CrearBoton(FilaList[contador], ListaBotonesComunes, 100, 50);
+                // Contador para recorrer el array con el texto de botones
                 contador += 1;
 
 
-                // Botón, columna, fila
+                // Botón, columna, fila + 1, queremos que empiece una fila por debajo,
+                // ya que encima está el Entry y el botón borrar
                 GridPrincipal.Add(botones, columnas, filas+1);
             }
         }
@@ -142,13 +145,13 @@ public partial class Ejercicio04 : ContentPage
 
 
     // Creación de controles
-    private Button CrearBoton(string textoBoton, string[] ListaBotones, float tamanio)
+    private Button CrearBoton(string textoBoton, string[] ListaBotones, float anchura, float altura)
     {
         Button boton = new Button()
         {
             Text = textoBoton,
-            WidthRequest = tamanio,
-            HeightRequest = 50,
+            WidthRequest = anchura,
+            HeightRequest = altura,
         };
 
 
