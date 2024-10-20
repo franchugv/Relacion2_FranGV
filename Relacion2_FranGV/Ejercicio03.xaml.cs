@@ -18,11 +18,7 @@ public partial class Ejercicio03 : ContentPage
         // Inicializar Layout
         VerticalStackLayout VerticallayoutPrincipal;
         // Creación filas
-        HorizontalStackLayout Fila0 = new HorizontalStackLayout() { HorizontalOptions = LayoutOptions.Center };
-        HorizontalStackLayout Fila1 = new HorizontalStackLayout();
-        HorizontalStackLayout Fila2 = new HorizontalStackLayout();
-        HorizontalStackLayout Fila3 = new HorizontalStackLayout();
-        HorizontalStackLayout Fila4 = new HorizontalStackLayout();
+        HorizontalStackLayout FilaHSL = new HorizontalStackLayout();
 
         // Instanciar Layout
         VerticallayoutPrincipal = new VerticalStackLayout
@@ -34,11 +30,7 @@ public partial class Ejercicio03 : ContentPage
             Children =
             {                
                 EntryDatos,
-                Fila0,
-                Fila1,
-                Fila2,
-                Fila3,
-                Fila4
+                FilaHSL
             }
         };
 
@@ -54,59 +46,40 @@ public partial class Ejercicio03 : ContentPage
 
         // RECURSOS FILAS
         const byte numColum = 4;
-        string[] BotonesTotales = { "1", "2", "3", "4", "5", "6", "7", "8", "9", "%", "Borrar", "x", "-", "+", "÷", "=" };
-        string   Fila0List = "Borrar";
-        string[] Fila1List = { "7", "8", "9", "x" };
-        string[] Fila2List = { "4", "5", "6", "+" };
-        string[] Fila3List = { "1", "2", "3", "÷" };
-        string[] Fila4List = { "0", "%", "-", "=" };
+        const byte numFilas = 4;
+        string   FilaBorrar = "Borrar";
+        string[] ListaBotonesTexto = { 
+            "7", "8", "9", "x",
+            "4", "5", "6", "+", 
+            "1", "2", "3", "÷", 
+            "0", "%", "-", "=" };
 
 
-        List<Button> botones = new List<Button>();
-        // FILA 0
-        Fila0.Children.Add(CrearBoton(Fila0List, ListaBotonesNoOperadores, 200));
+
 
         // FILA 1
-        for (int indice = 0; indice < numColum; indice++)
-		{
-            botones.Add(CrearBoton(Fila1List[indice], ListaBotonesNoOperadores, 50));
-            
-            Fila1.Children.Add(botones[indice]);
-        }
+        FilaHSL.Children.Add(CrearBoton(FilaBorrar, ListaBotonesNoOperadores, 200));
 
-        List<Button> botonesFila2 = new List<Button>();
+        // Contador para recorrer la lista de botones
+        int contador = 0;
 
-        // FILA 2
-        for (int indice = 0; indice < numColum; indice++)
+        for(int indiceFila = 0; indiceFila < numFilas; indiceFila++)
         {
-            botonesFila2.Add(CrearBoton(Fila2List[indice], ListaBotonesNoOperadores, 50));
+            // Creación de la fila
+            FilaHSL = new HorizontalStackLayout() { HorizontalOptions = LayoutOptions.Center };
 
-            Fila2.Children.Add(botonesFila2[indice]);
+            for(int indiceColumna = 0; indiceColumna < numColum; indiceColumna++)
+            {
+                Button botonFila = CrearBoton(ListaBotonesTexto[contador], ListaBotonesNoOperadores, 50);
+
+                // Añadir botón a la fila
+                FilaHSL.Add(botonFila);
+
+                contador++;
+            }
+            // Añadir columna al layout
+            VerticallayoutPrincipal.Children.Add(FilaHSL);
         }
-
-        // FILA 3
-        List<Button> botonesFila3 = new List<Button>();
-
-        for (int indice = 0; indice < numColum; indice++)
-        {
-            botonesFila3.Add(CrearBoton(Fila3List[indice], ListaBotonesNoOperadores, 50));
-
-            Fila3.Children.Add(botonesFila3[indice]);
-
-
-        }
-
-        // FILA 4
-        List<Button> botonesFila4 = new List<Button>();
-
-        for (int indice = 0; indice < numColum; indice++)
-        {
-            botonesFila4.Add(CrearBoton(Fila4List[indice], ListaBotonesNoOperadores, 50));
-
-            Fila4.Children.Add(botonesFila4[indice]);
-        }
-
-
 
         // Cargar el Layout
         Content = VerticallayoutPrincipal;
@@ -116,17 +89,16 @@ public partial class Ejercicio03 : ContentPage
     }
 
     // Creación de controles
-    private Button CrearBoton(string texto, string[] Lista, float tamanio)
+    private Button CrearBoton(string textoBoton, string[] ListaNoOperadores, float ancho)
     {
         Button boton = new Button()
         {
-            Text = texto,
-            WidthRequest = tamanio,
+            Text = textoBoton,
+            WidthRequest = ancho,
             HeightRequest = 50,
         };
 
-
-        if (Lista.Contains(texto))
+        if (ListaNoOperadores.Contains(textoBoton))
         {
             boton.Clicked += (s, e) => ControladorBotones(s, e);
         }
