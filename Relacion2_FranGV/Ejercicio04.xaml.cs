@@ -10,7 +10,7 @@ public partial class Ejercicio04 : ContentPage
 
     public Ejercicio04()
 	{
-		InitializeComponent();
+		// InitializeComponent();
 
         // RECURSOS FILAS
         const byte numColumBotonesyGrid = 4;
